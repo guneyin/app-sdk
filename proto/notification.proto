@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "./notification";
+
+service NotificationService {
+  rpc SendNotification(NotificationServiceRequest) returns (Empty) {}
+}
+
+enum MessageType {
+  RATING = 0;
+}
+
+message NotificationServiceRequest {
+  google.protobuf.Timestamp Date = 1;
+  MessageType message_type = 2;
+  string sender_id = 3;
+  string receiver_id = 4;
+  uint64 score = 5;
+}
+
+message Empty {}
